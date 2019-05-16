@@ -242,6 +242,9 @@ add_SingleWinLine(DoubleElim,BracketX3 + 6,
 
 # DoubleElim.show()
 
-output_Filename = (mapcombos.split('.')[0].split('_'))[0:3]
-# print("".join(output_Filename))
+filename_split = (mapcombos.split('.')[0].split('_'))
+del filename_split[3]
+# print(filename_split)
+# print("_".join(filename_split))
+output_Filename = "_".join(filename_split)
 DoubleElim.save("".join(output_Filename) + '_Bracket.png')
