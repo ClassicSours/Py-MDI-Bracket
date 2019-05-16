@@ -93,7 +93,6 @@ keylevel = sys.argv[3]
 
 maplist = pd.read_csv(mapcombos,delimiter=',')
 maporder = pd.read_csv(sets,delimiter=',',index_col=0)
-# print(maporder)
 
 match_graphics = []
 for index,row in maporder.iterrows():
