@@ -139,18 +139,23 @@ for i in range(0,4):
 
 # print(teams)
 teamcolor = [(230,126,34,255),
+             (255,255,255,255),
+             (255,144,22,255),
              (230,34,34,255),
              (46,204,113,255),
-             (255,144,22,255),
+             (173,20,87,255),
              (155,89,182,255),
-             (255,255,255,255),
-             (255,254,105,255),
              (194,194,194,255)]
           # [1,2,3,4,5,6,7,8]
 teamorder = [1,5,7,3,4,8,6,2]
 for index, team in teams.iterrows():
     # print(team[0],index,teamorder[index])
-    DoubleElim = add_text(DoubleElim,BracketX1,2 * teamorder[index] - 1,team[0],teamcolor[index], True)
+    DoubleElim = add_text(DoubleElim,
+                          BracketX1,
+                          2 * teamorder[index] - 1,
+                          team[0],
+                          teamcolor[index],
+                          True)
 
 ##############################################################
 # Upper Round 2
@@ -187,7 +192,7 @@ DoubleElim = add_text(DoubleElim,BracketX3,0,"Upper Finals","white")
 
 DoubleElim.paste(match_graphics[10],(width * (BracketX3 + 1),height * 7))
 
-DoubleElim = add_text(DoubleElim,BracketX3,8,12,daycolor[day[10]-1])
+DoubleElim = add_text(DoubleElim,BracketX3,8,11,daycolor[day[10]-1])
 
 ##############################################################
 # Lower Semifinals
@@ -213,7 +218,7 @@ DoubleElim = add_text(DoubleElim,BracketX4+1,7,"W(13)","white")
 
 DoubleElim.paste(match_graphics[13],(width * (BracketX4 + 1),height * 7))
 
-DoubleElim = add_text(DoubleElim,BracketX4,9,13,daycolor[day[13]-1])
+DoubleElim = add_text(DoubleElim,BracketX4,9,14,daycolor[day[13]-1])
 
 ##############################################################
 # Index
