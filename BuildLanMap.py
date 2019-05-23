@@ -24,9 +24,8 @@ def add_text(image,x,y,text,fill, raline = False):
         x += .25
     font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMono.ttf", 45)
     draw = ImageDraw.Draw(image)
-    w,h = draw.textsize(str(text),font = font)
-    # print(w,h)
-    xoffset = 0;
+    w = draw.textsize(str(text),font = font)[0]
+    xoffset = 0
     if(raline):
         xoffset = width * .75 - w
     ImageDraw.Draw(image).text((x*width+1 + xoffset,y*height+height*.15),  str(text),font=font,fill="black")
@@ -90,10 +89,10 @@ def add_SingleWinLine(image,a,b,c,fill):
     draw.line((width*(a+.75),height*(c),width*(a + 1.5),height*(c)),fill = fill, width = 2)
     del draw
 
-mappool = "data/LAN_Spring_MapPool.csv"
-sets = "data/LAN_Spring_Sets.csv"
-top8 = "data/LAN_Spring_Teams.txt"
-keylevel = 19
+mappool = sys.argv[1]
+sets = sys.argv[2]
+top8 = sys.argv[3]
+keylevel = sys.argv[4]
 
 maplist = pd.read_csv(mappool,delimiter=',', skipinitialspace=True)
 maporder = pd.read_csv(sets,delimiter=',',index_col=0, skipinitialspace=True)
@@ -132,20 +131,13 @@ DoubleElim = add_text(DoubleElim,BracketX1,0,"Upper Round 1","white")
 
 day = [1,1,1,1,1,1,2,2,2,2,2,3,3,3]
 daycolor = [(127,196,254,255),(220,207,58,255),(212,70,51,255)]
-
 for i in range(0,4):
     DoubleElim.paste(match_graphics[i],(width * (BracketX1 + 1),height * ((i * YOffset) + 1)))
     DoubleElim = add_text(DoubleElim, BracketX1, BracketY1 + (i * YOffset),i+1,daycolor[day[i]-1])
 
 # print(teams)
-teamcolor = [(230,126,34,255),
-             (255,255,255,255),
-             (255,144,22,255),
-             (230,34,34,255),
-             (46,204,113,255),
-             (173,20,87,255),
-             (155,89,182,255),
-             (194,194,194,255)]
+teamcolor = [(230,126,34,255), (255,255,255,255), (255,144,22,255), (230,34,34,255), (46,204,113,255), (173,20,87,255), (155,89,182,255), (194,194,194,255)]
+          # [1,8,4,5,2,7,3,6]
           # [1,2,3,4,5,6,7,8]
 teamorder = [1,5,7,3,4,8,6,2]
 for index, team in teams.iterrows():
@@ -158,6 +150,7 @@ for index, team in teams.iterrows():
                           True)
 
 ##############################################################
+
 # Upper Round 2
 DoubleElim = add_text(DoubleElim,BracketX2,0,"Upper Round 2","white")
 
@@ -226,13 +219,6 @@ for i in range(0,3):
     DoubleElim = add_colorRectange(DoubleElim,BracketX4,BracketY2+YOffset+i,1,1,daycolor[i])
     DoubleElim = add_text(DoubleElim,BracketX4+1,BracketY2+YOffset+i," = Day " + str(i + 1),daycolor[i])
 
-# DoubleElim = add_colorRectange(DoubleElim,BracketX4,BracketY2+YOffset,1,1,(255,0,0,255))
-# DoubleElim = add_colorRectange(DoubleElim,BracketX4,BracketY2+YOffset+1,1,1,(0,255,0,255))
-
-# DoubleElim = add_text(DoubleElim,BracketX4+1,BracketY2+YOffset," = Day 1",(255,0,0,255))
-# DoubleElim = add_text(DoubleElim,BracketX4+1,BracketY2+YOffset+1," = Day 2",(0,255,0,255))
-
-
 ##############################################################
 # Bracket Lines
 
@@ -281,3 +267,4 @@ del(filename_split[2])
 # print("_".join(filename_split))
 output_Filename = "_".join(filename_split[::-1])
 DoubleElim.save("".join(output_Filename) + '_Bracket.png')
+
