@@ -89,6 +89,10 @@ def add_SingleWinLine(image,a,b,c,fill):
     draw.line((width*(a+.75),height*(c),width*(a + 1.5),height*(c)),fill = fill, width = 2)
     del draw
 
+if len(sys.argv) < 4:
+    sys.tracebacklimit = 0
+    raise ValueError("Program needs 4 Arguments to Run, <Mappool.csv> <Sets.csv> <Teams.txt> <keylevel> recieved: {}".format(len(sys.argv)))
+    
 mappool = sys.argv[1]
 sets = sys.argv[2]
 top8 = sys.argv[3]
